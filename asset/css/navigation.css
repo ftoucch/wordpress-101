@@ -1,0 +1,126 @@
+/* fonts 
+---
+font-family: 'Lora', serif;
+font-family: 'Ubuntu', sans-serif; 
+*/
+
+.subtitle
+{
+    font-weight: 700;
+    color:#1792d2;
+    font-size:.75rem;
+    margin:0;
+}
+
+/*
+=====================================
+            TYPOGRAPHY
+=====================================
+*/
+.site-title-link
+
+{
+    text-decoration: none;
+    color:#143774;
+}
+
+h1
+{
+    font-family:'Lora', serif;
+    font-weight: 400;
+    color:#143774;
+    font-size:2rem;
+    margin:0;
+}
+
+
+
+/*
+
+=====================================
+            LAYOUT
+=====================================
+*/
+.container
+{
+    width:90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.container-nav
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+header{
+    
+    background: #f8f8f8;
+    padding: 2em 0;
+}
+
+@media (max-width: 720px)
+{
+    .container-nav
+    {
+        flex-direction: column;
+
+    }
+    header
+    {
+        text-align: center;
+    }
+}
+
+/* NAVIGATION*/
+nav ul
+{
+    list-style: none;
+    padding:0;
+    display: flex;
+    justify-content:center;
+    
+    
+}
+nav li
+{
+    margin-left: 2em;
+}
+nav a
+{
+   text-decoration: none;
+   color: #707070;
+   font-weight: 700; 
+   padding: .25em 0;
+}
+nav a:hover,
+nav a:focus
+{
+    color:#1792d2;
+}
+.current_page_item{
+	border-bottom: 1px solid black;
+}
+
+
+@media (max-width: 720px)
+{
+    nav ul
+    {
+        flex-direction: column;
+    }
+
+    nav li
+    {
+        margin: .5em 0;
+    }
+    .current_page_item
+    {
+        border-bottom: none;
+    }
+}
+.custom-logo
+{
+    margin:0
+}

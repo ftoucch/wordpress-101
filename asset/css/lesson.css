@@ -1,0 +1,84 @@
+body{
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif; 
+}
+
+/*
+===========================
+    BLOG DISPLAY FORMATING
+    ============================
+*/
+.blog-container
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 5%;
+}
+.blog-thumbnail
+{
+    width:50%;
+    padding: 1em .5em;
+    margin-top: 2em;
+}
+.blog-content
+{
+    width:83%;
+    padding: 1.5em 1.5em;
+    margin-top: 2em;
+}
+h2,
+p
+{
+    padding:0;
+    margin: 0;
+}
+.post-date
+{
+    text-align: center;
+}
+.blog-post-title
+{
+    text-decoration: none;
+    color:#ff6200;
+}
+@media (max-width: 720px)
+{
+    .blog-container
+    {
+        flex-direction: column;
+    }
+    .blog-content
+    {
+    padding:1rem;
+    margin: 2em auto;
+    width: 80%;
+    }
+    .blog-thumbnail
+    {
+        width: 80%;
+        padding: 1em auto;
+        margin: 0 auto;
+        
+    }
+    .lesson-post-thumnail
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h2,
+    p
+    {
+        text-align: center;
+    }
+}
+
+/*
+====================================
+    HOMEPAGE STYLING
+====================================
+*/
+
+
+
+
