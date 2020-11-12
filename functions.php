@@ -122,8 +122,15 @@ add_action('widgets_init','lesson_widget_setup');
 /*
 
 ======================================
-function to Require the register form
+function to Require the Admin Function
 ======================================
 */
+require get_template_directory() . '/inc/function-admin.php';
 
-require get_template_directory() . '/inc/function-reg.php';
+/*
+
+======================================
+function to Require the customizer
+======================================
+*/
+require get_template_directory() . '/partials/customizer.php';
