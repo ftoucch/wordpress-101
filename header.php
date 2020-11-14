@@ -20,26 +20,43 @@
 </head>
 <body>
     <header>
-        <div class="container container-nav">
-        <div class="site-branding">
-        <?php if ( ! has_custom_logo() ) { ?>
+       
+     <div class="container">
+         <nav>
+            <div class="menu-icons">
+                <i class="fa fa-bars"></i>
+                <i class="fa fa-times"></i>
+            </div>
+            <div class="logo">
+            <?php if(has_custom_logo()) :
+                    
+                        the_custom_logo();
+                    
+                    
+                    else : ?>
+                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                    <p> <?php bloginfo('description'); ?> </p>
+				   <?php
 
-                <h1><a class="site-title-link" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url"><?php bloginfo( 'name' ); ?></a></h1>
-                <p class="subtitle"> <?php bloginfo('description') ?></p>
-            <?php
-            } else {
-            the_custom_logo();
-            }
+                    endif;        
+                    
+            
             ?>
+            
+            </div>
 
-        </div>
-    <nav>
-        <?php wp_nav_menu(
-            array(
-                'theme_locatiom' => 'primary_menu',
-            )
-        ); ?>
-    </nav>
-    </div><!-- close container -->
+           <?php
+           
+           wp_nav_menu( array(
+               'theme_location' => 'primary_menu',
+               'menu_class' => 'nav-list',
+               'link_before'          => ' ',
+               'link_after'           => ' ',
+           ) );
+           
+           ?>
+         <nav>
+    
+    </div>
     </header>
 

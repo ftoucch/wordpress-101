@@ -8,11 +8,20 @@ body{
     BLOG DISPLAY FORMATING
     ================================
 */
+
+.container
+{
+    width: 90%;
+    margin: 0 auto;
+    max-width: 117rem;
+    padding:0 1.5rem;
+   
+}
 .blog-container
 {
     display: flex;
     justify-content: space-between;
-    margin: 5%;
+    margin-top: 10%;
 }
 .blog-thumbnail
 {
@@ -41,11 +50,12 @@ p
     text-decoration: none;
     color:#ff6200;
 }
-@media (max-width: 720px)
+@media (max-width: 850px)
 {
     .blog-container
     {
         flex-direction: column;
+        margin-top: 25%;
     }
     .blog-content
     {

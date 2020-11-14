@@ -21,6 +21,11 @@ function lesson_script_enqueue()
     wp_enqueue_style( 'lesson-register-style');
     wp_register_style('lesson-navigation-style' ,get_template_directory_uri() . '/asset/css/navigation.css', array(), '1.0.0', 'all' );
     wp_enqueue_style( 'lesson-navigation-style');
+    wp_register_style('font-awesome' ,get_template_directory_uri() . '/asset/font-awesome/css/font-awesome.min.css', array(), 'all' );
+    wp_enqueue_style( 'font-awesome');
+
+    wp_register_script('lesson-navigation-script' ,get_template_directory_uri() . '/asset/js/navigation.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'lesson-navigation-script');
 }
 
 add_action('wp_enqueue_scripts', 'lesson_script_enqueue');
@@ -62,6 +67,18 @@ function lesson_theme_support()
             'secondary_menu' => esc_html__('Secondary', 'Optional Menu')
 
     ) );
+  // functions to add arrows in front of menu with submenu
+    
+function be_arrows_in_menus( $item_output, $item, $depth, $args ) {
+
+	if( in_array( 'menu-item-has-children', $item->classes ) ) {
+		$arrow = 0 == $depth ? '<i class="fa fa-caret-down"></i>' : '<i class="fa fa-caret-right"></i>';
+		$item_output = str_replace( '</a>', $arrow . '</a>', $item_output );
+	}
+
+	return $item_output;
+}
+add_filter( 'walker_nav_menu_start_el', 'be_arrows_in_menus', 10, 4 );
 }
 
 add_action('after_setup_theme', 'lesson_theme_support');
