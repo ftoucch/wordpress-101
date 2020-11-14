@@ -24,7 +24,7 @@
      <div class="container">
          <nav>
             <div class="menu-icons">
-                <i class="fa fa-bars"></i>
+                <i id  class="fa fa-bars"></i>
                 <i class="fa fa-times"></i>
             </div>
             <div class="logo">
