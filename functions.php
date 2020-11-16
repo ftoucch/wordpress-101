@@ -17,6 +17,11 @@ function lesson_script_enqueue()
     wp_enqueue_style( 'lesson-major-style', get_stylesheet_uri(), array() );
     wp_register_style('lesson-custom-style' ,get_template_directory_uri() . '/asset/css/lesson.css', array(), '1.0.0', 'all' );
     wp_enqueue_style( 'lesson-custom-style');
+
+    $custom_css = theme_get_customizer_css();
+    wp_add_inline_style( 'lesson-custom-style', $custom_css );
+
+
     wp_register_style('lesson-register-style' ,get_template_directory_uri() . '/asset/css/signup.css', array(), '1.0.0', 'all' );
     wp_enqueue_style( 'lesson-register-style');
     wp_register_style('lesson-navigation-style' ,get_template_directory_uri() . '/asset/css/navigation.css', array(), '1.0.0', 'all' );
@@ -151,3 +156,88 @@ function to Require the customizer
 ======================================
 */
 require get_template_directory() . '/partials/customizer.php';
+/*
+===========================================
+function to Add settings to the Customizer
+===========================================
+*/
+function theme_customize_register( $wp_customize ) {
+    // Text color
+    $wp_customize->add_setting( 'text_color', array(
+      'default'   => '',
+      'transport' => 'refresh',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
+      'section' => 'colors',
+      'label'   => esc_html__( 'Text color', 'theme' ),
+    ) ) );
+
+    // Link color
+    $wp_customize->add_setting( 'link_color', array(
+      'default'   => '',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+      'section' => 'colors',
+      'label'   => esc_html__( 'Link color', 'theme' ),
+    ) ) );
+
+    // Accent color
+    $wp_customize->add_setting( 'accent_color', array(
+      'default'   => '',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
+      'section' => 'colors',
+      'label'   => esc_html__( 'Accent color', 'theme' ),
+    ) ) );
+
+    // Border color
+    $wp_customize->add_setting( 'border_color', array(
+      'default'   => '',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'border_color', array(
+      'section' => 'colors',
+      'label'   => esc_html__( 'Border color', 'theme' ),
+    ) ) );
+
+    // Sidebar background
+    $wp_customize->add_setting( 'sidebar_background', array(
+      'default'   => '',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sidebar_background', array(
+      'section' => 'colors',
+      'label'   => esc_html__( 'Sidebar Background', 'theme' ),
+    ) ) );
+  }
+
+  add_action( 'customize_register', 'theme_customize_register' );
+
+
+  function theme_get_customizer_css() {
+    ob_start();
+
+    $text_color = get_theme_mod( 'text_color', '' );
+    if ( ! empty( $text_color ) ) {
+      ?>
+      body {
+        color: <?php echo $text_color; ?>;
+      }
+      <?php
+    }
+
+    $css = ob_get_clean();
+    return $css;
+  }
+
