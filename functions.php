@@ -17,15 +17,16 @@ function lesson_script_enqueue()
     wp_enqueue_style( 'lesson-major-style', get_stylesheet_uri(), array() );
     wp_register_style('lesson-custom-style' ,get_template_directory_uri() . '/asset/css/lesson.css', array(), '1.0.0', 'all' );
     wp_enqueue_style( 'lesson-custom-style');
+    
+    wp_register_style('lesson-navigation-style' ,get_template_directory_uri() . '/asset/css/navigation.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'lesson-navigation-style');
 
     $custom_css = theme_get_customizer_css();
     wp_add_inline_style( 'lesson-custom-style', $custom_css );
 
+    wp_add_inline_style( 'lesson-navigation-style', $custom_css );
 
-    wp_register_style('lesson-register-style' ,get_template_directory_uri() . '/asset/css/signup.css', array(), '1.0.0', 'all' );
-    wp_enqueue_style( 'lesson-register-style');
-    wp_register_style('lesson-navigation-style' ,get_template_directory_uri() . '/asset/css/navigation.css', array(), '1.0.0', 'all' );
-    wp_enqueue_style( 'lesson-navigation-style');
+
     wp_register_style('font-awesome' ,get_template_directory_uri() . '/asset/font-awesome/css/font-awesome.min.css', array(), 'all' );
     wp_enqueue_style( 'font-awesome');
 
@@ -173,53 +174,15 @@ function theme_customize_register( $wp_customize ) {
       'label'   => esc_html__( 'Text color', 'theme' ),
     ) ) );
 
-    // Link color
-    $wp_customize->add_setting( 'link_color', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
+    $wp_customize-> add_setting('header_color', array(
+        'default' => '',
+        'transport' => 'refresh',
+    ));
 
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-      'section' => 'colors',
-      'label'   => esc_html__( 'Link color', 'theme' ),
-    ) ) );
-
-    // Accent color
-    $wp_customize->add_setting( 'accent_color', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
-      'section' => 'colors',
-      'label'   => esc_html__( 'Accent color', 'theme' ),
-    ) ) );
-
-    // Border color
-    $wp_customize->add_setting( 'border_color', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'border_color', array(
-      'section' => 'colors',
-      'label'   => esc_html__( 'Border color', 'theme' ),
-    ) ) );
-
-    // Sidebar background
-    $wp_customize->add_setting( 'sidebar_background', array(
-      'default'   => '',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sidebar_background', array(
-      'section' => 'colors',
-      'label'   => esc_html__( 'Sidebar Background', 'theme' ),
-    ) ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_color', array(
+        'section' => 'colors',
+        'label'   => esc_html__( 'Header color', 'theme' ),
+      ) ) );
   }
 
   add_action( 'customize_register', 'theme_customize_register' );
@@ -237,7 +200,19 @@ function theme_customize_register( $wp_customize ) {
       <?php
     }
 
+
+    $header_color = get_theme_mod( 'header_color', '' );
+    if ( ! empty( $header_color ) ) {
+      ?>
+      header {
+        background-color: <?php echo $header_color; ?>;
+      }
+      <?php
+    }
+
+
     $css = ob_get_clean();
     return $css;
-  }
+}
 
+    
